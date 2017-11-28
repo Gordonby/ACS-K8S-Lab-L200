@@ -11,11 +11,11 @@ spec:
     metadata:
       labels:
         app: captureordertd
-        version: v2
-    spec:   
+        version: v3
+    spec:      
       containers:
         - name: captureordertd
-          image: shanepeckham/captureordertd:v2
+          image: shanepeckham/captureordertd:v3
           resources:
             requests:
               cpu: 100m
@@ -26,6 +26,6 @@ spec:
           imagePullPolicy: Always
           env:
            -  name:  "MONGOHOST"
-              value: "mongodb://mongo-mongodb"
+              value: "mongodb://k8orders:QyzzuAhEuCybiGDxI1o0ai4myLE3No3cBQS15n72xBEXIGNBbNnCztmRLLz2FnNSPtJdQzUzumuqwdFY7FKr2w==@k8orders.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
            -  name: "TEAMNAME"
               value: "Shane"
