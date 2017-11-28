@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: captureordertd
+spec:
+  template:
+    metadata:
+      labels:
+        app: captureordertd
+    spec:      
+      containers:
+        - name: captureordertd
+          image: shanepeckham/captureordertd:v2
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 200m
+          ports:
+          - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+           -  name:  "MONGOHOST"
+              value: "mongodb://mongo-mongodb"
+           -  name: "TEAMNAME"
+              value: "Shane"
