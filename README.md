@@ -1,4 +1,4 @@
-# Container Tech Day
+# OSS App Modernisation - UK Tech Day
 
 ![Output sample](https://github.com/shanepeckham/TechDay/blob/master/giphy.gif)
 
