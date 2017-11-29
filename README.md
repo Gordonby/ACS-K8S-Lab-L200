@@ -48,7 +48,17 @@ kubectl --namespace <> get pods
 
 Here we want you to deploy a mongoDB single pod using a standard Helm chart, deploy the container captureordertd populating the environment variables and expose the captureordertd container as a public endpoint by using a Service.
 
+### Hints
+
 See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like. You need to map this container over port 8080 as this is where is is listening.
+
+To install MongoDB via Helm use
+
+```helm install --name mongo stable/mongodb```
+
+If you get an error about tiller version, update the HELM version on the server, upgrade using:
+
+```helm init --upgrade```
 
 ### Success Criteria
 
@@ -69,9 +79,9 @@ In Kubernetes an HPA is a horizontal scaling unit with which we auto-scale a Dep
 
 ### Hints
 
-You must deploy captureordertd as a Deployment object in Kubernetes in order to apply an HPA to it
-You can use the following on cluster container to test the load on your captureordertd Deployment
-You must deploy v2 of the captureordertd
+* You must deploy captureordertd as a Deployment object in Kubernetes in order to apply an HPA to it
+* You can use the following on cluster container to test the load on your captureordertd Deployment
+* You must deploy v2 of the captureordertd
 
 ```
 kubectl run -i --tty load-generator --image=busybox /bin/sh
