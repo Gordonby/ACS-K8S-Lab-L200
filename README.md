@@ -1,5 +1,68 @@
 # Container Tech Day.
 
+Welcome to the App Modernisation tech day. 
+
+## Tools required
+
+You will require:
+
+* Install the Azure CLI 2.0, get it here - https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+* Install git command line tools, get it here - https://git-scm.com/downloads
+* Install Postman, get it here - https://www.getpostman.com - this is optional but useful
+* Install Kubectl, get it here - https://kubernetes.io/docs/tasks/tools/install-kubectl/
+* Install helm, get it here - https://helm.sh/
+
+
+When using the Azure CLI, after logging in, if you have more than one subscripton you may need to set the default subscription you wish to perform actions against. To do this use the following command:
+
+```
+az account set --subscription "<your requried subscription guid>"
+```
+
+# The Challenges
+
+## Challenge 1 - Install ACS (not AKS) and connect to your cluster
+
+### Success Criteria
+* You can run the following command against your K8 cluster and see your nodes:
+
+```
+kubectl get nodes
+```
+
+## Challenge 2 - Deploy the sock shops solution to your cluster
+
+Here we want you to deploy a full multi-tiered solution to Kubernetes so that you can familiarise yourself what a declaritive yaml deployment looks like.
+
+### Success Criteria
+
+* You can run the following command against your K8 cluster and see your sock shop pods:
+
+```
+kubectl --namespace <> get pods
+```
+
+* You can connect to the sock shop front end
+
+## Challenge 3 - Deploy the capture order container and mongo db
+
+Here we want you to deploy a mongoDB single pod using a standard Helm chart, deploy the container captureordertd populating the environment variables and expose the captureordertd container as a public endpoint by using a Service.
+
+See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like. You need to map this container over port 8080 as this is where is is listening.
+
+### Success Criteria
+
+* You can run the following command against your K8 cluster and see your captureordertd external IP:
+
+```
+kubectl get svc
+```
+
+* You can connect to your Helm installed MongoDB instance and create a record
+* You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
+* You can run the Swagger test harness and get a MongoDB orderid as a response
+
+
 
 ## Command cheat sheet
 
