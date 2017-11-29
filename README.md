@@ -36,6 +36,13 @@ kubectl get nodes
 
 Here we want you to deploy a full multi-tiered solution to Kubernetes so that you can familiarise yourself what a declaritive yaml deployment looks like.
 
+### Hints
+
+* You will find the sock shop yaml files inside the SockShop folder. Have at look the various components of the solution and how they are formulated in yaml
+* Deploy the objects using:
+
+    ```kubectl create -f ./SockShop/```
+
 ### Success Criteria
 
 * You can run the following command against your K8 cluster and see your sock shop pods:
