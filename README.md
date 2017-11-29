@@ -192,7 +192,7 @@ We now want to deploy SQL Server on Linux on our cluster. To do this you will ne
 
 * Exec into your container to run SQL commands
 ```
-k8fed exec -it <pod> -- /bin/bash
+kubectl exec -it <pod> -- /bin/bash
 ```
 
 * Use sqlcmd to create a new database and a new table and insert some data into the table.
