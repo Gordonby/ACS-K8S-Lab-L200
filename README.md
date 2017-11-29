@@ -249,24 +249,28 @@ An order can be placed successfully from a presentation layer
 ## Command cheat sheet
 
 ###Create AKS Cluster
-az aks create --resource-group CSADay_K8s_Aks2--name csaDayAks2--node-count 1 --generate-ssh-keys
+```
+az acs create --orchestrator-type kubernetes --resource-group <yourresourcegroupk8> --name <yourk8cluster> --generate-ssh-keys
+```
 
 ###Install Kubectl
-az aks install-cli
+```az acs kubernetes install-cli``
 
 ###Get Creds for K8s
-az aks get-credentials --resource-group CSADay_K8s_Aks --name csaDayAks2
+```az acs kubernetes get-credentials --resource-group=<yourresourcegroupk8> --name=<yourk8cluster>```
 
 ###Check it's all working
-Kubectl get nodes
+```kubectl get nodes```
 
 ###Browse k8s dashboard
-az aks browse -g CSADay_K8s_Aks -n csaDayAks2 
+
+```az acs kubernetes browse -g <yourresourcegroupk8> -n <yourk8cluster>```
 
 ###Zip up ssh from cloudshell
-zip -q -9 -j ~/clouddrive/sshkeys3.zip ~/.ssh/*
+```zip -q -9 -j ~/clouddrive/sshkeys3.zip ~/.ssh/*```
 
 ###Pull in the ssh files into linux subsystem for windows10
+
     7  cd /
     8  ls
     9  cd mnt
@@ -283,24 +287,32 @@ zip -q -9 -j ~/clouddrive/sshkeys3.zip ~/.ssh/*
     20  cp -rf * ~/.ssh/
 
 ###Install Helm
+```
 apt install linuxbrew-wrapper
 brew install kubernetes-helm
+```
 
 ####Or if that messes up
+```
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
+```
 
 ###Test mongoDb post install
+```
 kubectl run mongo-mongodb-client --rm --tty -i --image bitnami/mongodb --command -- mongo --host mongo-mongodb
+```
 
 ###Test out by using some simple commands
+```
     show db
     cosmos = { title:"CosmosDb", category:"Database", url:"https://docs.microsoft.com/en-us/azure/cosmos-db/introduction" }
     azuredb = { title:"AzureDb", category:"Database", url:"https://azure.microsoft.com/en-us/services/sql-database/" }
     db.azureservices.save(cosmos)
     db.azureservices.save(azuredb)
     db.azureservices.find()
+```
 
 
 
@@ -309,7 +321,7 @@ kubectl run mongo-mongodb-client --rm --tty -i --image bitnami/mongodb --command
 ###Run the Services Yaml
 
 ###Open the swagger page on the new External IP - Submit an order
-http://52.178.74.151:8080/swagger/
+http://<your external ip>:8080/swagger/
 
 
 ###Log back into mongo and check for the data
