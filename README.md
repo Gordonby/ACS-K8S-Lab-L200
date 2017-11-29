@@ -1,4 +1,4 @@
-# OSS App Modernisation - UK Tech Day
+# OSS App Modernisation Hands on Challenge - UK Tech Day
 
 ![Output sample](https://github.com/shanepeckham/TechDay/blob/master/giphy.gif)
 
