@@ -18,7 +18,7 @@ You will require:
 When using the Azure CLI, after logging in, if you have more than one subscripton you may need to set the default subscription you wish to perform actions against. To do this use the following command:
 
 ```
-az account set --subscription "<your requried subscription guid>"
+az account set --subscription "<your subscription guid>"
 ```
 
 # The Challenges
