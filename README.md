@@ -61,6 +61,178 @@ kubectl get svc
 * You can connect to your Helm installed MongoDB instance and create a record
 * You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
 * You can run the Swagger test harness and get a MongoDB orderid as a response
+* Your passing your team name into the captureordertd container - you will receive no scores if you do not do this
+
+## Challenge 4 - Deploy the captureordertd container via an HPA
+
+In Kubernetes an HPA is a horizontal scaling unit with which we auto-scale a Deployment based on criteria. Your challenge is to run a load test against the captureordertd endpoint and see your captureordertd pods autoscale.
+
+### Hints
+
+You must deploy captureordertd as a Deployment object in Kubernetes in order to apply an HPA to it
+You can use the following on cluster container to test the load on your captureordertd Deployment
+You must deploy v2 of the captureordertd
+
+```
+kubectl run -i --tty load-generator --image=busybox /bin/sh
+```
+
+If it is already running, you can attach to it:
+
+```
+kubectl attach <pod> -c load-generator -i -t
+```
+
+And then run the following infinite load generation script:
+
+```
+while true; do wget -q -O- http://<externalIp or internal DNS>:8080/v1/order/ --post-data "EmailAddress=abc@abc.com"; done
+```
+
+Use the following to see your top pod activity
+
+```
+kubectl top pods 
+```
+
+and to see your pod status as they inflate and deflate
+
+```
+kubectl get pods -w
+```
+
+### Success Criteria
+
+* You are able to see the multiple pods spawning during the load
+
+
+## Challenge 5 - Perform a rolling update
+
+We now need to replace MongoDB with CosmosDB, without minimal downtime. Fortunately, we have a MongoDB API driver on CosmosDB. You need to deploy V3 of the captureordertd by means of a rolling update and still be able to capture orders, now in CosmosDB
+
+### Hints
+
+* You must deploy v3 of the captureordertd and replace v2 - see Docker Hub for any info
+* You must provision a CosmosDB instance and use the MongoDB API driver
+
+### Success Criteria
+
+* You can see records captured to CosmosDB not MongoDB
+* You can see your pods being replaced by the new version
+* You can rollback the update - see below
+
+Once you have completed the upgrade, do the following:
+
+To see the status of the rolling update
+
+```
+kubectl rollout history deployment captureordertd
+```
+
+Now rollback the update using this command
+
+```
+kubectl rollout undo deployment captureordertd
+```
+
+## Challenge 6 - Perform a rolling update while the system is under heavy load
+
+
+We now need to replace MongoDB with CosmosDB again, but this time while the system is under heavy load. We want to minimise order loss.
+
+Run the load generator in Challenge 4 while performing the rolling update in Challenge 5
+
+Redeploy your captureordertd:v3 container with the TEAMNAME parameter suffixed with '_LOAD'. We will measure how many records were successfull parsed during the rolling upate
+
+### Hints
+
+* You need to redeploy V3 of captureordertd again, but are there any parameters you can tweak to improve the throughput? Play with the CPU threshold/throughput parameters and see what you can do to minimise the loss. For example, does it make sense to have numerous pods serving requests or minimising the pod number for the upgrade?
+
+### Success Criteria
+
+* Run an order load of 1000 records, minimise the number of records lost due to failed requests. We will tally the record count, ensure you set the TEAMNAME environment variable correctly on the captureordertd container
+
+## Optional Challenge 7 - Deploy MS SQL Server on Linux on Kubernetes
+
+We now want to deploy SQL Server on Linux on our cluster. To do this you will need to use a Persistent Volume Claim and a Storage Class. 
+
+### Hints
+
+* Create a Storage Class
+
+    Use storage.k8s.io/v1beta1. 
+    If you created the cluster with managed disks you must use managed as the StorageClass kind. If your Agents are using Storage Accounts for DataDisks then you must use shared as the StorageClass kind.
+
+* Create the Persistent Volume Claim
+
+    You need to add the annotation to the Persistent Volume Claim definition. You need to specify storageClassName on specification.
+
+* Deploy the microsoft/mssql-server-linux container with the volume /var/opt/mssql mounted from the PersistentVolumeClaim you created.
+
+* The mssql container requires 3 environment variables; ACCEPT_EULA with a value of Y, MSSQL_SA_PASSWORD with a value of a complex password, and MSSQL_PID with a value of Developer
+
+* Exec into your container to run SQL commands
+```
+k8fed exec -it <pod> -- /bin/bash
+```
+
+* Use sqlcmd to create a new database and a new table and insert some data into the table.
+
+    Go to the bash shell of your mssql pod
+    Connect to your service instance on port 1433
+    ```
+        /opt/mssql-tools/bin/sqlcmd -S <IP_OF_SERVICE>,1433 -U SA -P '<YourPassword>'
+    ```
+    At the sqlcmd prompt create a new database
+    ```
+        CREATE DATABASE TestDB
+    ```
+    Verify the table was created
+    ```
+        SELECT Name from sys.Databases
+    ```
+    Execute the above commands
+    ```
+        GO
+    ```
+   
+    Exit the sqlcmd tool
+    ```
+        QUIT
+    ```
+
+### Success Criteria
+
+* You can successfully create record in your SQL server and see the storage created within Azure
+
+
+## Optional Challenge 8 - Add throttling to your API
+
+Add throttling to your API endpoint to only 60 requests per minute from a single IP
+
+### Hints
+
+* Use either Azure API Management, Kong or Logic Apps to do this
+
+### Success Criteria
+
+* You successfully throttle requests at 60 per minute from a single IP
+
+## Optional Challenge 9 - Add an event driven email notification to your order
+
+You must send an email notification to a recipient in the Email Address of the order but you must use an event binding on CosmosDB to trigger the email.
+
+### Success Criteria
+
+An email is sent to a recipient as triggered from a record created in CosmosDB
+
+## Optional Challenge 10 - Add a presentation layer to the API
+
+Add a presentation layer to the API,
+
+### Success Criteria
+
+An order can be placed successfully from a presentation layer
 
 
 
