@@ -34,7 +34,7 @@ kubectl get nodes
 
 ## Challenge 2 - Deploy the sock shops solution to your cluster
 
-Here we want you to deploy a full multi-tiered solution to Kubernetes so that you can familiarise yourself what a declaritive yaml deployment looks like.
+Here we want you to deploy a full multi-tiered solution to Kubernetes so that you can familiarise yourself what a declarative yaml deployment looks like.
 
 ### Hints
 
