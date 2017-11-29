@@ -1,4 +1,6 @@
-# Container Tech Day.
+# Container Tech Day
+
+![Output sample](https://github.com/shanepeckham/ServerlessMicroservices/raw/master/ServerlessMini.gif)
 
 Welcome to the App Modernisation tech day. 
 
