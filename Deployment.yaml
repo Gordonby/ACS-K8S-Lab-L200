@@ -28,4 +28,4 @@ spec:
            -  name:  "MONGOHOST"
               value: "mongodb://mongo-mongodb"
            -  name: "TEAMNAME"
-              value: "Shane"
+              value: "Tester"

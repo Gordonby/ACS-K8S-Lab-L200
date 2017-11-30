@@ -42,6 +42,10 @@ Here we want you to deploy a full multi-tiered solution to Kubernetes so that yo
 * Deploy the objects using:
 
     ```kubectl create -f ./SockShop/```
+    ```kubectl create -f ./SockShop/deployments```
+    ```kubectl create -f ./SockShop/services```
+    ```kubectl create -f ./SockShop/volume```
+
 
 ### Success Criteria
 
@@ -168,7 +172,7 @@ Use this script to run the load:
 
 ```
          COUNTER=0
-         while [  $COUNTER -lt 10 ]; do
+         while [  $COUNTER -lt 1000 ]; do
              wget -q -O- http://<your external ip>:8080/v1/order/ --post-data "EmailAddress=abc@abc.com";
              let COUNTER=COUNTER+1 
          done

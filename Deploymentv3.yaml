@@ -28,4 +28,4 @@ spec:
            -  name:  "MONGOHOST"
               value: "mongodb://k8orders:QyzzuAhEuCybiGDxI1o0ai4myLE3No3cBQS15n72xBEXIGNBbNnCztmRLLz2FnNSPtJdQzUzumuqwdFY7FKr2w==@k8orders.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
            -  name: "TEAMNAME"
-              value: "Shane"
+              value: "Tester"
