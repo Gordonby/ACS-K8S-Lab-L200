@@ -70,7 +70,10 @@ kubectl --namespace sock-shop get pods
 
 ## Challenge 3 - Deploy the capture order container and mongo db
 
-Here we want you to deploy a mongoDB single pod using a standard Helm chart, deploy the container captureordertd populating the environment variables and expose the captureordertd container as a public endpoint by using a Service.
+Here we want you to 
+1. Deploy a mongoDB single pod using a standard Helm chart
+1. Deploy the container *captureordertd*, populating the environment variables and expose the captureordertd container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
+
 
 ### Hints
 
