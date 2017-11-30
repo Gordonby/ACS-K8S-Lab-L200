@@ -89,7 +89,7 @@ Here we want you to
 
 ### Hints
 
-See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like. You need to map this container over port 8080 as this is where is is listening.
+See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like. You need to map this container over port 8080 as this is where it is listening.
 
 To install MongoDB via Helm use
 
@@ -100,7 +100,7 @@ If you get an error about tiller version, update the HELM version on the server,
 ```helm init --upgrade```
 
 To see the environment variables
-```kubectl exec -it thenameofyourpod -- /bin/bash```
+```kubectl exec -it <thenameofyourpod> -- /bin/bash```
 ```printenv```
 
 ## Challenge 4 - Deploy the captureordertd container via an HPA
@@ -199,7 +199,7 @@ Use this script to run the load:
 
 ### Hints
 
-* You need to redeploy V3 of captureordertd again, but are there any parameters you can tweak to improve the throughput? Play with the CPU threshold/throughput parameters and see what you can do to minimise the loss. For example, does it make sense to have numerous pods serving requests or minimising the pod number for the upgrade?
+* You need to redeploy V3 of captureordertd again, but are there any parameters you can tweak to improve the throughput? Play with the CPU threshold/throughput parameters and see what you can do to minimise the loss. For example, does it make sense to have numerous pods serving requests or minimising the pod number for the upgrade? Do you raise the CPU/Memory threshold for the autoscale?
 
 NB: Only suffix the TEAMNAME parameter with '_LOAD' when you are ready to do your final run.
 
@@ -259,7 +259,6 @@ kubectl exec -it <pod> -- /bin/bash
 ### Success Criteria
 
 * You can successfully create record in your SQL server and see the storage created within Azure
-
 
 ## Optional Challenge 8 - Add throttling to your API
 
