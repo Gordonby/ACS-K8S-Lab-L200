@@ -75,6 +75,18 @@ Here we want you to
 1. Deploy the container *captureordertd*, populating the environment variables and expose the captureordertd container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
 
 
+
+
+### Success Criteria
+
+* Your captureordertd service has an external IP
+* Inspect the environment variables to make sure your team name is correct 
+* You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
+* You can run the Swagger test harness and get a MongoDB orderid as a response
+* You can connect to your Helm installed MongoDB instance using *mongo-mongodb-client* and check for a record
+* Check the pod logs to inspect the operations
+* Your team name is passed into the captureordertd container - *you will receive no scores if you do not do this*
+
 ### Hints
 
 See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like. You need to map this container over port 8080 as this is where is is listening.
@@ -87,13 +99,9 @@ If you get an error about tiller version, update the HELM version on the server,
 
 ```helm init --upgrade```
 
-### Success Criteria
-
-* Your captureordertd service has an external IP
-* You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
-* You can run the Swagger test harness and get a MongoDB orderid as a response
-* You can connect to your Helm installed MongoDB instance using *mongo-mongodb-client* and check for a record
-* Your team name is passed into the captureordertd container - *you will receive no scores if you do not do this*
+To see the environment variables
+```kubectl exec -it thenameofyourpod -- /bin/bash```
+```printenv```
 
 ## Challenge 4 - Deploy the captureordertd container via an HPA
 
@@ -368,7 +376,8 @@ http://<your external ip>:8080/swagger/
     > db.orders.find()
     { "_id" : ObjectId("5a1d8b8faad9887d8fcc124a"), "id" : "5a1d8b8f354a8b004699ab89", "emailaddress" : "test@test.com", "preferredlanguage" : "en-gb", "product" : "balls", "total" : 1, "source" : "swagger", "status" : "Open" }
 
-
+### Inspect pod logs
+    kubectl logs thenameofyourpod
 
 ## Troubleshooting
 
