@@ -9,10 +9,9 @@ Welcome to the App Modernisation tech day.
 You will require:
 
 * Install the Azure CLI 2.0, get it here - https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-* Install git command line tools, get it here - https://git-scm.com/downloads
+* Install git command line tools, get it here - https://git-scm.com/downloads - Or use the Git for Windows GUI if you're not a grown-up.
 * Install Postman, get it here - https://www.getpostman.com - this is optional but useful
-* Install Kubectl, get it here - https://kubernetes.io/docs/tasks/tools/install-kubectl/
-* Install helm, get it here - https://helm.sh/
+* Install Kubectl, get it here - https://kubernetes.io/docs/tasks/tools/install-kubectl or you can use the *az acs kubernetes install-cli* command
 
 
 When using the Azure CLI, after logging in, if you have more than one subscripton you may need to set the default subscription you wish to perform actions against. To do this use the following command:
