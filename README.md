@@ -146,7 +146,7 @@ kubectl get pods -w
 * You are able to see the multiple pods spawning during the load
 
 
-## Challenge 5 - Perform a rolling update - live replace of mongoDB with CosmosDB 
+## Challenge 5 - Perform a rolling update - live replace of MongoDB with CosmosDB 
 
 We now need to replace MongoDB with CosmosDB, without minimal downtime. Fortunately, we have a MongoDB API driver on CosmosDB. You need to deploy V3 of the captureordertd by means of a rolling update and still be able to capture orders, now in CosmosDB
 
@@ -180,11 +180,11 @@ kubectl rollout undo deployment captureordertd
 ![Output sample](http://pop.h-cdn.co/assets/15/23/1433531619-biff.gif)
 
 
-We now need to replace MongoDB with CosmosDB again, but this time while the system is under heavy load. We want to minimise order loss.
+We now need to replace MongoDB with CosmosDB again, but this time while the system is under heavy load. We want to minimise order loss. So do a few test runs to try and optimise the parameters for this challenge. 
 
-Run the load generator in Challenge 4 while performing the rolling update in Challenge 5
+Run the load generator in Challenge 4 while performing the rolling update in Challenge 5.
 
-Redeploy your captureordertd:v3 container with the TEAMNAME parameter suffixed with '_LOAD'. We will measure how many records were successfull parsed during the rolling update.
+Redeploy your captureordertd:v3 container with the TEAMNAME parameter suffixed with '_LOAD' when you are ready to do your final run with your tuned parameters. We will measure how many records were successfull captured during the rolling update in both databases.
 
 Use this script to run the load:
 
@@ -271,7 +271,7 @@ Add throttling to your API endpoint to only 60 requests per minute from a single
 
 ### Success Criteria
 
-* You successfully throttle requests at 60 per minute from a single IP
+* You successfully throttle requests at 60 per minute from a single IP and return a graceful HTTP status code
 
 ## Optional Challenge 9 - Add an event driven email notification to your order
 
@@ -283,13 +283,11 @@ An email is sent to a recipient as triggered from a record created in CosmosDB
 
 ## Optional Challenge 10 - Add a presentation layer to the API
 
-Add a presentation layer to the API,
+Add a presentation layer to the API - a web site, mobile app, bot or anything that works.
 
 ### Success Criteria
 
-An order can be placed successfully from a presentation layer
-
-
+An order can be placed successfully from a presentation layer.
 
 ## Command cheat sheet
 
