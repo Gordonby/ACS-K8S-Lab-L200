@@ -25,7 +25,7 @@ az account set --subscription "<your subscription guid>"
 
 ## Challenge 1 - Install ACS (not AKS) and connect to your cluster
 
-    ![image](./Media/aks.jpg) 
+![image](./Media/aks.jpg) 
 
 ### Success Criteria
 * You can run the following command against your K8 cluster and see your nodes:
@@ -65,7 +65,7 @@ Here we want you to deploy a full multi-tiered solution to Kubernetes so that yo
 kubectl --namespace sock-shop get pods
 ```
 
-    ![image](./Media/sock-shop-pods.png) 
+![image](./Media/sock-shop-pods.png) 
 
 * You can connect to the sock shop front end
 
