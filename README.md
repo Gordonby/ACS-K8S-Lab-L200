@@ -41,10 +41,18 @@ Here we want you to deploy a full multi-tiered solution to Kubernetes so that yo
 * You will find the sock shop yaml files inside the SockShop folder. Have at look the various components of the solution and how they are formulated in yaml
 * Deploy the objects using:
 
-    ```kubectl create -f ./SockShop/```
-    ```kubectl create -f ./SockShop/deployments```
-    ```kubectl create -f ./SockShop/services```
-    ```kubectl create -f ./SockShop/volume```
+    ```
+    kubectl create -f ./SockShop/
+    ```
+    ```
+    kubectl create -f ./SockShop/deployments
+    ```
+    ```
+    kubectl create -f ./SockShop/services
+    ```
+    ```
+    kubectl create -f ./SockShop/volume
+    ```
 
 
 ### Success Criteria
