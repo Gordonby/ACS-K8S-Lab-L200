@@ -163,6 +163,17 @@ Run the load generator in Challenge 4 while performing the rolling update in Cha
 
 Redeploy your captureordertd:v3 container with the TEAMNAME parameter suffixed with '_LOAD'. We will measure how many records were successfull parsed during the rolling upate
 
+Use this script to run the load:
+
+
+```
+         COUNTER=0
+         while [  $COUNTER -lt 10 ]; do
+             wget -q -O- http://<your external ip>:8080/v1/order/ --post-data "EmailAddress=abc@abc.com";
+             let COUNTER=COUNTER+1 
+         done
+```
+
 ### Hints
 
 * You need to redeploy V3 of captureordertd again, but are there any parameters you can tweak to improve the throughput? Play with the CPU threshold/throughput parameters and see what you can do to minimise the loss. For example, does it make sense to have numerous pods serving requests or minimising the pod number for the upgrade?
