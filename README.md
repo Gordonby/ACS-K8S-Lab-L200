@@ -89,16 +89,11 @@ If you get an error about tiller version, update the HELM version on the server,
 
 ### Success Criteria
 
-* You can run the following command against your K8 cluster and see your captureordertd external IP:
-
-```
-kubectl get svc
-```
-
-* You can connect to your Helm installed MongoDB instance and create a record
+* Your captureordertd service has an external IP
 * You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
 * You can run the Swagger test harness and get a MongoDB orderid as a response
-* Your passing your team name into the captureordertd container - you will receive no scores if you do not do this
+* You can connect to your Helm installed MongoDB instance using *mongo-mongodb-client* and check for a record
+* Your team name is passed into the captureordertd container - *you will receive no scores if you do not do this*
 
 ## Challenge 4 - Deploy the captureordertd container via an HPA
 
