@@ -205,7 +205,7 @@ NB: Only suffix the TEAMNAME parameter with '_LOAD' when you are ready to do you
 
 ### Success Criteria
 
-* Run an order load of 1000 records, minimise the number of records lost due to failed requests. We will tally the record count, ensure you set the TEAMNAME environment variable correctly on the captureordertd container
+* Run an order load of 1000 records, minimise the number of records lost due to failed requests. We will tally the record count, ensure you set the TEAMNAME environment variable correctly on the captureordertd:v3 container
 
 ## Optional Challenge 7 - Deploy MS SQL Server on Linux on Kubernetes
 
