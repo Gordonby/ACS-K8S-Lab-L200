@@ -184,7 +184,7 @@ We now need to replace MongoDB with CosmosDB again, but this time while the syst
 
 Run the load generator in Challenge 4 while performing the rolling update in Challenge 5
 
-Redeploy your captureordertd:v3 container with the TEAMNAME parameter suffixed with '_LOAD'. We will measure how many records were successfull parsed during the rolling upate
+Redeploy your captureordertd:v3 container with the TEAMNAME parameter suffixed with '_LOAD'. We will measure how many records were successfull parsed during the rolling update.
 
 Use this script to run the load:
 
@@ -200,6 +200,8 @@ Use this script to run the load:
 ### Hints
 
 * You need to redeploy V3 of captureordertd again, but are there any parameters you can tweak to improve the throughput? Play with the CPU threshold/throughput parameters and see what you can do to minimise the loss. For example, does it make sense to have numerous pods serving requests or minimising the pod number for the upgrade?
+
+NB: Only suffix the TEAMNAME parameter with '_LOAD' when you are ready to do your final run.
 
 ### Success Criteria
 
