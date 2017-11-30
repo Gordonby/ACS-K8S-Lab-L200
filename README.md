@@ -68,14 +68,12 @@ kubectl --namespace sock-shop get pods
 
 * You can connect to the sock shop front end
 
-## Challenge 3 - Deploy the capture order container and mongo db
+## Challenge 3 - Deploy the capture order container and MongoDB
 
 Here we want you to 
 1. Deploy a mongoDB single pod using a standard Helm chart
-1. Deploy the container *captureordertd*, populating the environment variables and expose the captureordertd container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
-
-
-
+2. Deploy the container *captureordertd:v2*, populating the environment variables and expose the captureordertd:v2 container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
+3. You must deploy v2 of the captureordertd
 
 ### Success Criteria
 
@@ -89,7 +87,7 @@ Here we want you to
 
 ### Hints
 
-See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like. You need to map this container over port 8080 as this is where it is listening.
+See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like for the v2 tag. You need to map this container over port 8080 as this is where it is listening.
 
 To install MongoDB via Helm use
 
@@ -105,7 +103,7 @@ To see the environment variables
 
 ## Challenge 4 - Deploy the captureordertd container via an HPA
 
-In Kubernetes an HPA is a horizontal scaling unit with which we auto-scale a Deployment based on criteria. Your challenge is to run a load test against the captureordertd endpoint and see your captureordertd pods autoscale.
+In Kubernetes an HPA is a horizontal scaling unit with which we will use to auto-scale a Deployment based on threshold criteria. Your challenge is to run a load test against the captureordertd endpoint and see your captureordertd pods autoscale.
 
 ### Hints
 
