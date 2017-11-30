@@ -60,7 +60,7 @@ Here we want you to deploy a full multi-tiered solution to Kubernetes so that yo
 * You can run the following command against your K8 cluster and see your sock shop pods:
 
 ```
-kubectl --namespace <> get pods
+kubectl --namespace <sock-shop> get pods
 ```
 
 * You can connect to the sock shop front end
