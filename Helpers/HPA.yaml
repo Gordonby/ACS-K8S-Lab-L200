@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1 
+kind:  
+metadata: 
+  name:  
+spec: 
+  minReplicas:  
+  maxReplicas:  
+  targetCPUUtilizationPercentage: 2
+  scaleTargetRef: 
+    kind:  
+    name:  
+    apiVersion: apps/v1beta1 
