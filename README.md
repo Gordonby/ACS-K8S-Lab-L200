@@ -140,7 +140,7 @@ kubectl get pods -w
 * You are able to see the multiple pods spawning during the load
 
 
-## Challenge 5 - Perform a rolling update
+## Challenge 5 - Perform a rolling update - live replace of mongoDB with CosmosDB 
 
 We now need to replace MongoDB with CosmosDB, without minimal downtime. Fortunately, we have a MongoDB API driver on CosmosDB. You need to deploy V3 of the captureordertd by means of a rolling update and still be able to capture orders, now in CosmosDB
 
@@ -170,6 +170,8 @@ kubectl rollout undo deployment captureordertd
 ```
 
 ## Challenge 6 - Perform a rolling update while the system is under heavy load
+
+![Output sample](http://pop.h-cdn.co/assets/15/23/1433531619-biff.gif)
 
 
 We now need to replace MongoDB with CosmosDB again, but this time while the system is under heavy load. We want to minimise order loss.
