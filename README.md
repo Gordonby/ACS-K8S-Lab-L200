@@ -99,7 +99,9 @@ If you get an error about tiller version, update the HELM version on the server,
 
 To see the environment variables
 ```kubectl exec -it <thenameofyourpod> -- /bin/bash```
-```printenv```
+```
+printenv
+```
 
 ## Challenge 4 - Deploy the captureordertd container via an HPA
 
