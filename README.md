@@ -48,10 +48,12 @@ Copy and paste this script into the Cloud Shell.  It'll do 3 things;
 1. Create a resource group called K8S in eastus.
 1. Create a ACS cluster with a few specific options set.  You don't have to provide half of these, but i quite like the new B and Dv3 series - so we're setting that up.  The default would have been a D2_V2 VM for both agent and master VM's that get created.  It also would have been 3 agents, but 1 is enough for the time being.
 
+    ```
     az group create --name K8s --location eastus
     az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2s_v3 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
     az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
-
+    ```
+    
 This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remeber, always read ahead :)
 https://www.youtube.com/watch?v=4ht22ReBjno 
 
@@ -69,16 +71,20 @@ https://www.youtube.com/watch?v=4ht22ReBjno
 
 Run this command and see what pods you have running
 
-> kubectl get pods
+    ```
+    kubectl get pods
+    ```
 
 Now delete the pod
 
-> kubectl delete pod NameOfYourPod
-
+    ```
+    kubectl delete pod NameOfYourPod
+    ```
 Run this command again and see what's reported
 
-> kubectl get pods -w
-
+    ```
+    kubectl get pods -w
+    ```
 I'm expecting that your pod has gone, but a very similarly named one has been put in it's place.
 TA-DA.  Autohealing!
 
