@@ -20,6 +20,39 @@ When using the Azure CLI, after logging in, if you have more than one subscripto
 az account set --subscription "<your subscription guid>"
 ```
 
+To share Kubernetes config and be able to access a single cluster in your team, do the following.
+
+On the machine that has access to the cluster:
+
+
+```
+cd /.kube
+```
+Copy the config file for your cluster and make it available to your team. Copy it to the directory /.kube, it should exist if you instal kubectl. 
+
+Now to connect run the folling command
+
+```
+kubectl --kubeconfig ./<your cluster config file> get nodes
+```
+
+And now make yourself and alias for brevity:
+
+```
+alias k8='kubectl --kubeconfig ./<your cluster config file>'
+```
+
+Now you can run the following command:
+
+```
+k8 get nodes
+```
+
+
+
+
+
+
 # The Challenges
 
 ## Challenge 1 - Install ACS (not AKS) and connect to your cluster
