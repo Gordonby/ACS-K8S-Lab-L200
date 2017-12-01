@@ -19,7 +19,7 @@ When using the Azure CLI, after logging in, if you have more than one subscripto
 ```
 az account set --subscription "<your subscription guid>"
 ```
-
+## Sharing Kubernetes config between your team
 To share Kubernetes config and be able to access a single cluster in your team, do the following.
 
 On the machine that has access to the cluster:
@@ -323,63 +323,43 @@ An order can be placed successfully from a presentation layer.
 
 ## Command cheat sheet
 
-###Create AKS Cluster
+### Create AKS Cluster
 ```
 az acs create --orchestrator-type kubernetes --resource-group <yourresourcegroupk8> --name <yourk8cluster> --generate-ssh-keys
 ```
 
-###Install Kubectl
+### Install Kubectl
 ```az acs kubernetes install-cli``
 
-###Get Creds for K8s
+### Get Creds for K8s
 ```az acs kubernetes get-credentials --resource-group=<yourresourcegroupk8> --name=<yourk8cluster>```
 
 ###Check it's all working
 ```kubectl get nodes```
 
-###Browse k8s dashboard
+### Browse k8s dashboard
 
 ```az acs kubernetes browse -g <yourresourcegroupk8> -n <yourk8cluster>```
 
-###Zip up ssh from cloudshell
-```zip -q -9 -j ~/clouddrive/sshkeys3.zip ~/.ssh/*```
-
-###Pull in the ssh files into linux subsystem for windows10
-
-    7  cd /
-    8  ls
-    9  cd mnt
-    10  cd c
-    11  ls
-    12  cd Users
-    13  ls
-    14  cd gobyers
-    15  ls
-    16  cd Downloads
-    17  ls
-    18  cd sshkeys2
-    19  ls
-    20  cp -rf * ~/.ssh/
-
-###Install Helm
+### Install Helm
 ```
 apt install linuxbrew-wrapper
 brew install kubernetes-helm
 ```
 
-####Or if that messes up
+#### Or if that messes up
 ```
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
-###Test mongoDb post install
+### Test mongoDb post install
 ```
 kubectl run mongo-mongodb-client --rm --tty -i --image bitnami/mongodb --command -- mongo --host mongo-mongodb
 ```
 
-###Test out by using some simple commands
+### Test out by using some simple commands
 ```
     show db
     cosmos = { title:"CosmosDb", category:"Database", url:"https://docs.microsoft.com/en-us/azure/cosmos-db/introduction" }
@@ -390,16 +370,11 @@ kubectl run mongo-mongodb-client --rm --tty -i --image bitnami/mongodb --command
 ```
 
 
-
-###Run the ReplicationSet Yaml
-
-###Run the Services Yaml
-
-###Open the swagger page on the new External IP - Submit an order
+### Open the swagger page on the new External IP - Submit an order
 http://<your external ip>:8080/swagger/
 
 
-###Log back into mongo and check for the data
+### Log back into mongo and check for the data
 
     > db
     test
@@ -415,13 +390,13 @@ http://<your external ip>:8080/swagger/
 
 ## Troubleshooting
 
-####HELM refused to work, because of version Mismatch
+#### HELM refused to work, because of version Mismatch
     helm incompatible versions client[v2.7.2] server[v2.5.1]
 >helm init --upgrade
 
 
 
-####ERROR: Helm init --upgrade doesn't work
+#### ERROR: Helm init --upgrade doesn't work
     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     @         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
