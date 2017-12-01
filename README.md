@@ -130,6 +130,8 @@ Run this command again and see what's reported
 I'm expecting that your pod has gone, but a very similarly named one has been put in it's place.
 TA-DA.  Autohealing!
 
+![image](./Media/delete-pod.png) 
+
 ## Exercise 6 - Sock shop
 Ok, so Exercises 1-5 have been pretty simple.  We're familiar with kubectl, we've created a couple of containers and feeling pretty confident eh?
 Now yets run up the Sock Shop, a multi-container deployment which has a web front-end, nosql database and a slew of services.
