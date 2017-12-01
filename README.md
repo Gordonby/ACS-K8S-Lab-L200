@@ -369,7 +369,7 @@ kubectl run mongo-mongodb-client --rm --tty -i --image bitnami/mongodb --command
 
 ### Test out by using some simple commands
 ```
-    show db
+    show dbs
     cosmos = { title:"CosmosDb", category:"Database", url:"https://docs.microsoft.com/en-us/azure/cosmos-db/introduction" }
     azuredb = { title:"AzureDb", category:"Database", url:"https://azure.microsoft.com/en-us/services/sql-database/" }
     db.azureservices.save(cosmos)
