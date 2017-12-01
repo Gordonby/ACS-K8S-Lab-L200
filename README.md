@@ -83,7 +83,7 @@ Lets run a couple of other common commands.
 
 ```kubectl version```
 
-![image](./Media/cluster-info.png) 
+![image](./Media/version.png) 
 
 ## Exercise 3 - Creating a simple deployment
 
