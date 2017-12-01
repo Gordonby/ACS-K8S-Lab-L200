@@ -53,13 +53,18 @@ Copy and paste this script into the Cloud Shell.  It'll do 3 things;
     az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2s_v3 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
     az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
     ```
-    
-This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remeber, always read ahead :)
+
+This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remember, always read ahead :)
 https://www.youtube.com/watch?v=4ht22ReBjno 
 
 
-## Exercise 2 - Checking the nodes
+## Exercise 2 - kubectl 
+Kubectl is the main tool you're going to use to manage your kubernetes cluster.  It comes pre-installed in the Azure Cloud Shell, which is awesome. 
+Lets see what's been created
 
+    ```
+    kubectl get nodes
+    ```
 
 ## Exercise 3 - Accessing the dashboard
 
@@ -125,8 +130,19 @@ For now, we're going to abandon Sock Shop, but we'll be back to revisit it.
 
 By now, we're all bored of Cloud Shell, sure it's nice and easy.. But every time you go for a coffee, it times out - and we need to consider accessing this from somewhere else.
 
+### SSH Keys
 First, lets backup the SSH keys that were generated when we created the cluster.  You'll need these kept somewhere safe when your running K8S in a real environment.
 
+### Installing Kubectl
+We need to install Kubectl into your linux environment.
+
+If you're using *Bash on Ubuntu on Windows* here's the command
+
+    ```
+    .
+    ```
+
+Otherwise, consult this page on how to install it : https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 
 ### Sharing Kubernetes config
@@ -160,6 +176,22 @@ k8 get nodes
 
 
 ## Exercsie 8 - Helm
+Helm is a package manager for Kubernetes.  It will simply allow the installation of complex software using *Helm Charts* (are you noticing a terminology theme yet :)).
+
+Please read the introduction section through to the installation section here : https://github.com/kubernetes/helm
+
+Once installed, initialise it.
+
+    ```
+    helm init
+    ```
+
+Now lets have a quick look at all the things we could install with Helm
+
+    ```
+    helm search
+    ```
+
 
 ## Exercise 9 - MongoDb and Persistent Volume Claims
 Running a database in a container... A good idea?  Lets see.
