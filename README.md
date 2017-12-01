@@ -73,6 +73,18 @@ So lets have a look at a basic command that will tell us about the VM's.
 
 ```kubectl get nodes```
 
+![image](./Media/get-nodes.png) 
+
+Lets run a couple of other common commands.
+
+```kubectl cluster-info```
+
+![image](./Media/cluster-info.png) 
+
+```kubectl version```
+
+![image](./Media/cluster-info.png) 
+
 ## Exercise 3 - Creating a simple deployment
 
 
@@ -198,6 +210,8 @@ And now make yourself an alias for brevity:
 Now you can run the following command:
 
 ```k8 get nodes```
+
+
 
 ## Exercise 8 - Accessing the dashboard
 Kubernetes has a web dashboard, who knew!
