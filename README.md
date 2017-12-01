@@ -86,10 +86,7 @@ Lets run a couple of other common commands.
 
 ## Exercise 3 - Creating a simple deployment
 We're going to use a YAML file from the Azure Quickstarts.
-It's a simple deployment that creates
-1.
-1.
-1.
+The YAML file declaratively states the container name location and any other supporting Kubernetes resources needed.  We'll examine the YAML later.
 
     ```
     mkdir ~/clouddrive/acs-yaml
@@ -110,7 +107,7 @@ It's important to realise that an actual public ip address has been created
 
 You can hit this IP address in a browser and interact with the web app that's been created.
 
-## Exercise 4 - ???
+## Exercise 4 - YAML
 
 
 
