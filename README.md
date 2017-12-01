@@ -28,15 +28,15 @@ On the machine that has access to the cluster:
 ```
 cd /.kube
 ```
-Copy the config file for your cluster and make it available to your team. Copy it to the directory /.kube, it should exist if you instal kubectl. 
+Copy the config file for your cluster and make it available to your team. Copy it to the directory /.kube on your machine, it should exist if you instal kubectl. 
 
-Now to connect run the folling command
+Now to connect to the cluster run the folling command
 
 ```
 kubectl --kubeconfig ./<your cluster config file> get nodes
 ```
 
-And now make yourself and alias for brevity:
+And now make yourself an alias for brevity:
 
 ```
 alias k8='kubectl --kubeconfig ./<your cluster config file>'
