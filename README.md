@@ -52,7 +52,6 @@ Copy and paste this script into the Cloud Shell.  It'll do 3 things;
     az group create --name K8s --location eastus
     az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2_v2 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
     az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
-    zip -q -9 -j ~/clouddrive/sshkeys-$(date +%F).zip ~/.ssh/*
     ```
 
 This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remember, always read ahead :)
@@ -86,18 +85,33 @@ Lets run a couple of other common commands.
 ![image](./Media/version.png) 
 
 ## Exercise 3 - Creating a simple deployment
-
-
-## Exercise 4 - Creating a service to expose the pod
-
-
+We're going to use a YAML file from the Azure Quickstarts.
+It's a simple deployment that creates
+1.
+1.
+1.
 
     ```
-    kubectl get pods
+    mkdir ~/clouddrive/acs-yaml
+    cd ~/clouddrive/acs-yaml
+    curl -O https://raw.githubusercontent.com/Azure-Samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yml
+    kubectl create -f azure-vote-all-in-one-redis.yml
     ```
-    ```
-    kubectl get svc
-    ```
+
+Once this has created, lets use the following commands to see what's been created ```kubectl get pods``` ```kubectl get svc ```
+
+![image](./Media/azure-vote.png) 
+    
+We have 2 containers and 2 services.  One of the services is internally exposed, the other will receive a public ip address.
+If you use the command ```kubectl get svc -w``` the command console will watch for changes and report them.  So when a public ip address is created in Azure, it'll appear in the console window.
+
+It's important to realise that an actual public ip address has been created
+![image](./Media/ip-address.png) 
+
+You can hit this IP address in a browser and interact with the web app that's been created.
+
+## Exercise 4 - ???
+
 
 
 ## Exercise 5 - Autohealing
