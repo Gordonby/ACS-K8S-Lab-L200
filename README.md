@@ -59,6 +59,14 @@ k8 get nodes
 
 ![image](./Media/aks.jpg) 
 
+### Hints
+To create a cluster with an existing service principle use the following command:
+
+```
+az acs create --orchestrator-type Kubernetes -g <ResourceGroupName> -n <ClusterName> --service-principal <> --client-secret <>
+```
+
+
 ### Success Criteria
 * You can run the following command against your K8 cluster and see your nodes:
 
