@@ -80,6 +80,18 @@ From within the dashboard, go add
 1. port 80
 1. boom.
 
+Let's back out of the dashboard, now and for the rest of the lab.
+
+Run this command to see what's been created.
+
+    ```
+    kubectl get pods
+    ```
+    ```
+    kubectl get svc
+    ```
+
+
 ## Exercise 5 - Autohealing
 
 Run this command and see what pods you have running
@@ -100,6 +112,13 @@ I'm expecting that your pod has gone, but a very similarly named one has been pu
 TA-DA.  Autohealing!
 
 ## Exercise 6 - Sock shop
+Ok, so Exercises 1-5 have been pretty simple.  We're familiar with kubectl, we've created a couple of containers and feeling pretty confident eh?
+Now yets run up the Sock Shop, a multi-container deployment which has a web front-end, nosql database and a slew of services.
+The purpose of this is
+1. Introduction to namespaces
+1. Introduction to YAML
+1. Introduction to services
+1. Introduction to deployments
 
 * You will find the sock shop yaml files inside the SockShop folder. Have at look the various components of the solution and how they are formulated in yaml
 * Deploy the objects using:
@@ -197,7 +216,7 @@ Now lets have a quick look at all the things we could install with Helm
     ```
     helm search
     ```
-
+    
 
 ## Exercise 9 - MongoDb and Persistent Volume Claims
 Running a database in a container... A good idea?  Lets see.
