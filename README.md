@@ -155,8 +155,27 @@ For now, we're going to abandon Sock Shop, but we'll be back to revisit it.
 
 By now, we're all bored of Cloud Shell, sure it's nice and easy.. But every time you go for a coffee, it times out - and we need to consider accessing this from somewhere else.
 
+### Contexts
+Let's see what contexts are configured.  I've got a tonne, but hopefully you'll just have 1 for the cluster we created in Exercise 1.
+
+    kubectl config view
+
+Now, in the Cloud Shell lets look at where this is kept
+    cd ~/.kube/
+    ls
+
+You should have *config-K8sCluster-1* listed.
+Lets copy that out somewhere safe where we can grab it.
+    zip -q -9 -j ~/clouddrive/kubeconfig-$(date +%F).zip config-K8sCluster-1
+
+In the Cloud Shell, lets see where these files are stored.  Click on the *settings* cog and then *Manage File Share* - a new browser window will open in Azure Files where you can easily navigate to the directory with the kubeconfig zip file in it to download to your machine.
+
 ### SSH Keys
-First, lets backup the SSH keys that were generated when we created the cluster.  You'll need these kept somewhere safe when your running K8S in a real environment.
+We should backup the SSH keys that were generated when we created the cluster.  You'll need these kept somewhere safe when your running K8S in a real environment.
+
+    zip -q -9 -j ~/clouddrive/sshkeys-$(date +%F).zip ~/.ssh/*
+
+In the same way as you downloaded the config zip, do the same for the ssh key zip.
 
 ### Installing Kubectl
 We need to install Kubectl into your linux environment.
