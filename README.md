@@ -49,19 +49,27 @@ Copy and paste this script into the Cloud Shell.  It'll do 3 things;
 1. Create a ACS cluster with a few specific options set.  You don't have to provide half of these, but i quite like the new B- so we're setting that up.  The default would have been a D2_V2 VM for both agent and master VM's that get created.  It also would have been 3 agents, but 1 is enough for the time being.
 
     ```
-az group create --name K8s --location eastus
-az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2_v2 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
-az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
-zip -q -9 -j ~/clouddrive/sshkeys-$(date +%F).zip ~/.ssh/*
+    az group create --name K8s --location eastus
+    az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2_v2 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
+    az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
+    zip -q -9 -j ~/clouddrive/sshkeys-$(date +%F).zip ~/.ssh/*
     ```
 
 This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remember, always read ahead :)
 https://www.youtube.com/watch?v=4ht22ReBjno 
 
+### Post creation
+After the cluster has been created, in the Azure Portal find the resource group and open it up.  You'll see a lot of Azure services have been created.  It's important to realise that we have
+1. A new vNet
+1. VM's, not VM Scalesets
+1. A bunch of other infrastructure services
+
+![image](./Media/cluster-created.png) 
 
 ## Exercise 2 - kubectl 
 Kubectl is the main tool you're going to use to manage your kubernetes cluster.  It comes pre-installed in the Azure Cloud Shell, which is awesome. 
-Lets see what's been created
+
+So lets have a look at a basic command that will tell us about the VM's.
 
     ```
     kubectl get nodes
