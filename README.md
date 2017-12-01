@@ -1,4 +1,4 @@
-# OSS App Modernisation Hands on Challenge - UK Tech Day
+# Azure Container Service - Kubernetes Lab.  Level 200-300
 
 ## WARNING
 This is currently a work in progress....  Do not follow... yet :)
