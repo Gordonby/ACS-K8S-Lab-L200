@@ -1,25 +1,129 @@
 # OSS App Modernisation Hands on Challenge - UK Tech Day
 
-![Output sample](https://github.com/shanepeckham/TechDay/blob/master/Media/giphy.gif)
+## WARNING
+This is currently a work in progress....  Do not follow... yet :)
 
-Welcome to the App Modernisation tech day. 
+## Origin Story
+Forked from https://github.com/shanepeckham/UKTechDay---OSS-App-Modernisation which was a Level 400 version.
+The Level 200-300 lab works up the basics a little slower.
 
 ## Tools required
+Exercises 1-6
+* Azure Cloud Shell (Bash version) (It's built into the Azure Portal, nothing to install!)
 
-You will require:
+Exercises 7-15
+* Bash on a linux OS (or the Linux subsystem for Windows 10)
 
-* Install the Azure CLI 2.0, get it here - https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-* Install git command line tools, get it here - https://git-scm.com/downloads - Or use the Git for Windows GUI if you're not a grown-up.
-* Install Postman, get it here - https://www.getpostman.com - this is optional but useful
-* Install Kubectl, get it here - https://kubernetes.io/docs/tasks/tools/install-kubectl or you can use the *az acs kubernetes install-cli* command
+## Caveats
+No Windows, no GUI's.  By that i mean you can of course use the Windows OS, but please use either the
+1. Linux subsystem for Windows 10
+1. A Linux VM inside Hyper-V.
+
+If you really want to use the Powershell on Windows 7, go for it... But you'll be going off-lab and will likely have issues to resolve that aren't covered in this guide.
+
+## Exercise 0 - The Illustrated Children's Guide to Kubernetes
+If you haven't seen this, watching it will take 8 minutes and it does the best job of talking about the Kubernetes constructs that i've seen.
+Go watch it.  Seriously.
+https://www.youtube.com/watch?v=4ht22ReBjno 
+
+## Exercise 1 - Creating a Kubernetes Cluster in Azure.
+At the time of writing, ACS (Azure Container Service) is the recommended option, not AKS which is still in preview.
+There are 2 main ways of creating an ACS Cluster.
+1. In the Azure Portal GUI
+1. Using the Azure CLI
+
+My preference is the Cloud Shell because it generates the SSH keys for you as well as the service principal.  Feel free to use the Portal GUI, but you're going off-lab (but just a little bit so don't worry too much.
+
+For everyone else, lets open the Cloud Shell.  
+
+> https://portal.azure.com
+
+Login and then click the Cloud Shell icon
+
+![image](./Media/cloud-shell.png) 
+
+You'll then see the Cloud Shell open at the bottom of the screen.
+
+Copy and paste this script into the Cloud Shell.  It'll do 3 things;
+1. Create a resource group called K8S in eastus.
+1. Create a ACS cluster with a few specific options set.  You don't have to provide half of these, but i quite like the new B and Dv3 series - so we're setting that up.  The default would have been a D2_V2 VM for both agent and master VM's that get created.  It also would have been 3 agents, but 1 is enough for the time being.
+
+    az group create --name K8s --location eastus
+    az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2s_v3 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
+    az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
+
+This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remeber, always read ahead :)
+https://www.youtube.com/watch?v=4ht22ReBjno 
 
 
-When using the Azure CLI, after logging in, if you have more than one subscripton you may need to set the default subscription you wish to perform actions against. To do this use the following command:
+## Exercise 2 - Checking the nodes
+
+
+## Exercise 3 - Accessing the dashboard
+
+
+## Exercise 4 - Running your first container
+
+
+## Exercise 5 - Autohealing
+
+Run this command and see what pods you have running
+
+> kubectl get pods
+
+Now delete the pod
+
+> kubectl delete pod NameOfYourPod
+
+Run this command again and see what's reported
+
+> kubectl get pods -w
+
+I'm expecting that your pod has gone, but a very similarly named one has been put in it's place.
+TA-DA.  Autohealing!
+
+## Exercise 6 - Sock shop
+
+* You will find the sock shop yaml files inside the SockShop folder. Have at look the various components of the solution and how they are formulated in yaml
+* Deploy the objects using:
+
+    ```
+    kubectl create -f ./SockShop/
+    ```
+    ```
+    kubectl create -f ./SockShop/deployments
+    ```
+    ```
+    kubectl create -f ./SockShop/services
+    ```
+    ```
+    kubectl create -f ./SockShop/volume
+    ```
+
+
+* You can run the following command against your K8 cluster and see your sock shop pods:
 
 ```
-az account set --subscription "<your subscription guid>"
+kubectl --namespace sock-shop get pods
 ```
-## Sharing Kubernetes config between your team
+
+![image](./Media/sock-shop-pods.png) 
+
+
+Now lets connect to the Sock-Shop front end website.
+
+
+For now, we're going to abandon Sock Shop, but we'll be back to revisit it.
+
+## Exercise 7 - Contexts, moving and sharing.
+
+By now, we're all bored of Cloud Shell, sure it's nice and easy.. But every time you go for a coffee, it times out - and we need to consider accessing this from somewhere else.
+
+First, lets backup the SSH keys that were generated when we created the cluster.  You'll need these kept somewhere safe when your running K8S in a real environment.
+
+
+
+### Sharing Kubernetes config
 To share Kubernetes config and be able to access a single cluster in your team, do the following.
 
 On the machine that has access to the cluster:
@@ -49,86 +153,13 @@ k8 get nodes
 ```
 
 
+## Exercsie 8 - Helm
 
-
-
-
-# The Challenges
-
-## Challenge 1 - Install ACS (not AKS) and connect to your cluster
-
-![image](./Media/aks.jpg) 
-
-### Hints
-To create a cluster with an existing service principle use the following command:
-
-```
-az acs create --orchestrator-type Kubernetes -g <ResourceGroupName> -n <ClusterName> --service-principal <> --client-secret <>
-```
-
-
-### Success Criteria
-* You can run the following command against your K8 cluster and see your nodes:
-
-```
-kubectl get nodes
-```
-
-## Challenge 2 - Deploy the sock shops solution to your cluster
-
-Here we want you to deploy a full multi-tiered solution to Kubernetes so that you can familiarise yourself what a declarative yaml deployment looks like.
-
-### Hints
-
-* You will find the sock shop yaml files inside the SockShop folder. Have at look the various components of the solution and how they are formulated in yaml
-* Deploy the objects using:
-
-    ```
-    kubectl create -f ./SockShop/
-    ```
-    ```
-    kubectl create -f ./SockShop/deployments
-    ```
-    ```
-    kubectl create -f ./SockShop/services
-    ```
-    ```
-    kubectl create -f ./SockShop/volume
-    ```
-
-
-### Success Criteria
-
-* You can run the following command against your K8 cluster and see your sock shop pods:
-
-```
-kubectl --namespace sock-shop get pods
-```
-
-![image](./Media/sock-shop-pods.png) 
-
-* You can connect to the sock shop front end
-
-## Challenge 3 - Deploy the capture order container and MongoDB
+## Exercise 9 - MongoDb and Persistent Volume Claims
+Running a database in a container... A good idea?  Lets see.
 
 Here we want you to 
 1. Deploy a mongoDB single pod using a standard Helm chart
-2. Deploy the container *captureordertd:v2*, populating the environment variables and expose the captureordertd:v2 container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
-3. You must deploy v2 of the captureordertd
-
-### Success Criteria
-
-* Your captureordertd service has an external IP
-* Inspect the environment variables to make sure your team name is correct 
-* You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
-* You can run the Swagger test harness and get a MongoDB orderid as a response
-* You can connect to your Helm installed MongoDB instance using *mongo-mongodb-client* and check for a record
-* Check the pod logs to inspect the operations
-* Your team name is passed into the captureordertd container - *you will receive no scores if you do not do this*
-
-### Hints
-
-See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like for the v2 tag. You need to map this container over port 8080 as this is where it is listening.
 
 To install MongoDB via Helm use
 
@@ -144,15 +175,34 @@ To see the environment variables
 printenv
 ```
 
-## Challenge 4 - Deploy the captureordertd container via an HPA
+## Exercise 10 - Running an API to add data to MongoDb
+1. Deploy the container *captureordertd:v2*, populating the environment variables and expose the captureordertd:v2 container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
+1. You must deploy v2 of the captureordertd
 
-In Kubernetes an HPA is a horizontal scaling unit with which we will use to auto-scale a Deployment based on threshold criteria. Your challenge is to run a load test against the captureordertd endpoint and see your captureordertd pods autoscale.
+* Your captureordertd service has an external IP
+* Inspect the environment variables to make sure your team name is correct 
+* You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
+* You can run the Swagger test harness and get a MongoDB orderid as a response
+* You can connect to your Helm installed MongoDB instance using *mongo-mongodb-client* and check for a record
+* Check the pod logs to inspect the operations
+* Your team name is passed into the captureordertd container - *you will receive no scores if you do not do this*
 
 ### Hints
+
+See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like for the v2 tag. You need to map this container over port 8080 as this is where it is listening.
+
+
+## Exercise 11 - Yaml and Environment Variables
+
+## Exercise 12 - Load testing
+
+## Exercise 13 - Horizontal Scale Out
+In Kubernetes an HPA is a horizontal scaling unit with which we will use to auto-scale a Deployment based on threshold criteria. Your challenge is to run a load test against the captureordertd endpoint and see your captureordertd pods autoscale.
 
 * You must deploy captureordertd as a Deployment object in Kubernetes in order to apply an HPA to it
 * You can use the following on cluster container to test the load on your captureordertd Deployment
 * You must deploy v2 of the captureordertd
+
 
 ```
 kubectl run -i --tty load-generator --image=busybox /bin/sh
@@ -186,8 +236,7 @@ kubectl get pods -w
 
 * You are able to see the multiple pods spawning during the load
 
-
-## Challenge 5 - Perform a rolling update - live replace of MongoDB with CosmosDB 
+## Exercise 15 - Perform a rolling update - live replace of MongoDB with CosmosDB 
 
 We now need to replace MongoDB with CosmosDB, without minimal downtime. Fortunately, we have a MongoDB API driver on CosmosDB. You need to deploy V3 of the captureordertd by means of a rolling update and still be able to capture orders, now in CosmosDB
 
@@ -216,118 +265,11 @@ Now rollback the update using this command
 kubectl rollout undo deployment captureordertd
 ```
 
-## Challenge 6 - Perform a rolling update while the system is under heavy load
-
-![Output sample](http://pop.h-cdn.co/assets/15/23/1433531619-biff.gif)
 
 
-We now need to replace MongoDB with CosmosDB again, but this time while the system is under heavy load. We want to minimise order loss. So do a few test runs to try and optimise the parameters for this challenge. 
-
-Run the load generator in Challenge 4 while performing the rolling update in Challenge 5.
-
-Redeploy your captureordertd:v3 container with the TEAMNAME parameter suffixed with '_LOAD' when you are ready to do your final run with your tuned parameters. We will measure how many records were successfull captured during the rolling update in both databases.
-
-Use this script to run the load:
 
 
-```
-         COUNTER=0
-         while [  $COUNTER -lt 1000 ]; do
-             wget -q -O- http://<your external ip>:8080/v1/order/ --post-data "EmailAddress=abc@abc.com";
-             let COUNTER=COUNTER+1 
-         done
-```
 
-### Hints
-
-* You need to redeploy V3 of captureordertd again, but are there any parameters you can tweak to improve the throughput? Play with the CPU threshold/throughput parameters and see what you can do to minimise the loss. For example, does it make sense to have numerous pods serving requests or minimising the pod number for the upgrade? Do you raise the CPU/Memory threshold for the autoscale?
-
-NB: Only suffix the TEAMNAME parameter with '_LOAD' when you are ready to do your final run.
-
-### Success Criteria
-
-* Run an order load of 1000 records, minimise the number of records lost due to failed requests. We will tally the record count, ensure you set the TEAMNAME environment variable correctly on the captureordertd:v3 container
-
-## Optional Challenge 7 - Deploy MS SQL Server on Linux on Kubernetes
-
-We now want to deploy SQL Server on Linux on our cluster. To do this you will need to use a Persistent Volume Claim and a Storage Class. 
-
-### Hints
-
-* Create a Storage Class
-
-    Use storage.k8s.io/v1beta1. 
-    If you created the cluster with managed disks you must use managed as the StorageClass kind. If your Agents are using Storage Accounts for DataDisks then you must use shared as the StorageClass kind.
-
-* Create the Persistent Volume Claim
-
-    You need to add the annotation to the Persistent Volume Claim definition. You need to specify storageClassName on specification.
-
-* Deploy the microsoft/mssql-server-linux container with the volume /var/opt/mssql mounted from the PersistentVolumeClaim you created.
-
-* The mssql container requires 3 environment variables; ACCEPT_EULA with a value of Y, MSSQL_SA_PASSWORD with a value of a complex password, and MSSQL_PID with a value of Developer
-
-* Exec into your container to run SQL commands
-```
-kubectl exec -it <pod> -- /bin/bash
-```
-
-* Use sqlcmd to create a new database and a new table and insert some data into the table.
-
-    Go to the bash shell of your mssql pod
-    Connect to your service instance on port 1433
-    ```
-        /opt/mssql-tools/bin/sqlcmd -S <IP_OF_SERVICE>,1433 -U SA -P '<YourPassword>'
-    ```
-    At the sqlcmd prompt create a new database
-    ```
-        CREATE DATABASE TestDB
-    ```
-    Verify the table was created
-    ```
-        SELECT Name from sys.Databases
-    ```
-    Execute the above commands
-    ```
-        GO
-    ```
-   
-    Exit the sqlcmd tool
-    ```
-        QUIT
-    ```
-
-### Success Criteria
-
-* You can successfully create record in your SQL server and see the storage created within Azure
-
-## Optional Challenge 8 - Add throttling to your API
-
-Add throttling to your API endpoint to only 60 requests per minute from a single IP
-
-### Hints
-
-* Use either Azure API Management, Kong or Logic Apps to do this
-
-### Success Criteria
-
-* You successfully throttle requests at 60 per minute from a single IP and return a graceful HTTP status code
-
-## Optional Challenge 9 - Add an event driven email notification to your order
-
-You must send an email notification to a recipient in the Email Address of the order but you must use an event binding on CosmosDB to trigger the email.
-
-### Success Criteria
-
-An email is sent to a recipient as triggered from a record created in CosmosDB
-
-## Optional Challenge 10 - Add a presentation layer to the API
-
-Add a presentation layer to the API - a web site, mobile app, bot or anything that works.
-
-### Success Criteria
-
-An order can be placed successfully from a presentation layer.
 
 ## Command cheat sheet
 
