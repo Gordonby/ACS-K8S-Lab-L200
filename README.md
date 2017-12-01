@@ -157,12 +157,12 @@ Let's see what contexts are configured.  I've got a tonne, but hopefully you'll 
     kubectl config view
 
 Now, in the Cloud Shell lets look at where this is kept
-    cd ~/.kube/
-    ls
+    ```cd ~/.kube/```
+    ```ls```
 
 You should have *config-K8sCluster-1* listed.
 Lets copy that out somewhere safe where we can grab it.
-    zip -q -9 -j ~/clouddrive/kubeconfig-$(date +%F).zip config-K8sCluster-1
+    ```zip -q -9 -j ~/clouddrive/kubeconfig-$(date +%F).zip config-K8sCluster-1```
 
 In the Cloud Shell, lets see where these files are stored.  Click on the *settings* cog and then *Manage File Share* - a new browser window will open in Azure Files where you can easily navigate to the directory with the kubeconfig zip file in it to download to your machine.
 
@@ -185,37 +185,19 @@ If you're using *Bash on Ubuntu on Windows* here's the command
 Otherwise, consult this page on how to install it : https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 
-### Sharing Kubernetes config
-To share Kubernetes config and be able to access a single cluster in your team, do the following.
-
-On the machine that has access to the cluster:
-
-
-```
-cd /.kube
-```
-Copy the config file for your cluster and make it available to your team. Copy it to the directory /.kube on your machine, it should exist if you instal kubectl. 
-
+### Copying in the config
+Copy it to the directory /.kube on your machine, it should exist if you instal kubectl. 
 Now to connect to the cluster run the folling command
 
-```
-kubectl --kubeconfig ./<your cluster config file> get nodes
-```
+```kubectl --kubeconfig ./<your cluster config file> get nodes```
 
 And now make yourself an alias for brevity:
 
-```
-alias k8='kubectl --kubeconfig ./<your cluster config file>'
-```
+```alias k8='kubectl --kubeconfig ./<your cluster config file>'```
 
 Now you can run the following command:
 
-```
-k8 get nodes
-```
-
-### Connecting
-Does it work?
+```k8 get nodes```
 
 ## Exercise 8 - Accessing the dashboard
 Kubernetes has a web dashboard, who knew!
