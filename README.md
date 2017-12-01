@@ -71,26 +71,14 @@ Kubectl is the main tool you're going to use to manage your kubernetes cluster. 
 
 So lets have a look at a basic command that will tell us about the VM's.
 
-    ```
-    kubectl get nodes
-    ```
+```kubectl get nodes```
 
-## Exercise 3 - Accessing the dashboard
-
-```az acs kubernetes browse -g <yourresourcegroupk8> -n <yourk8cluster>```
+## Exercise 3 - Creating a simple deployment
 
 
-## Exercise 4 - Running your first container
-From within the dashboard, go add
-1. new pod
-1. name =nginx
-1. external ip
-1. port 80
-1. boom.
+## Exercise 4 - Creating a service to expose the pod
 
-Let's back out of the dashboard, now and for the rest of the lab.
 
-Run this command to see what's been created.
 
     ```
     kubectl get pods
@@ -226,8 +214,35 @@ Now you can run the following command:
 k8 get nodes
 ```
 
+### Connecting
+Does it work?
 
-## Exercsie 8 - Helm
+## Exercise 8 - Accessing the dashboard
+Kubernetes has a web dashboard, who knew!
+Lets have a look
+
+```az acs kubernetes browse -g K8S -n K8SCluster```
+
+## Exercise 9 - Creating a deployment in the Dashboard GUI
+From within the dashboard, go add
+1. new pod
+1. name =nginx
+1. external ip
+1. port 80
+1. boom.
+
+Let's back out of the dashboard, now and for the rest of the lab.
+
+Run this command to see what's been created.
+
+    ```
+    kubectl get pods
+    ```
+    ```
+    kubectl get svc
+    ```
+
+## Exercsie 10 - Helm
 Helm is a package manager for Kubernetes.  It will simply allow the installation of complex software using *Helm Charts* (are you noticing a terminology theme yet :)).
 
 Please read the introduction section through to the installation section here : https://github.com/kubernetes/helm
@@ -245,7 +260,7 @@ Now lets have a quick look at all the things we could install with Helm
     ```
     
 
-## Exercise 9 - MongoDb and Persistent Volume Claims
+## Exercise 11 - MongoDb and Persistent Volume Claims
 Running a database in a container... A good idea?  Lets see.
 
 Here we want you to 
@@ -265,7 +280,7 @@ To see the environment variables
 printenv
 ```
 
-## Exercise 10 - Running an API to add data to MongoDb
+## Exercise 12 - Running an API to add data to MongoDb
 1. Deploy the container *captureordertd:v2*, populating the environment variables and expose the captureordertd:v2 container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
 1. You must deploy v2 of the captureordertd
 
@@ -282,11 +297,11 @@ printenv
 See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like for the v2 tag. You need to map this container over port 8080 as this is where it is listening.
 
 
-## Exercise 11 - Yaml and Environment Variables
+## Exercise 13 - Yaml and Environment Variables
 
-## Exercise 12 - Load testing
+## Exercise 14 - Load testing
 
-## Exercise 13 - Horizontal Scale Out
+## Exercise 15 - Horizontal Scale Out
 In Kubernetes an HPA is a horizontal scaling unit with which we will use to auto-scale a Deployment based on threshold criteria. Your challenge is to run a load test against the captureordertd endpoint and see your captureordertd pods autoscale.
 
 * You must deploy captureordertd as a Deployment object in Kubernetes in order to apply an HPA to it
@@ -326,7 +341,7 @@ kubectl get pods -w
 
 * You are able to see the multiple pods spawning during the load
 
-## Exercise 15 - Perform a rolling update - live replace of MongoDB with CosmosDB 
+## Exercise 16 - Perform a rolling update - live replace of MongoDB with CosmosDB 
 
 We now need to replace MongoDB with CosmosDB, without minimal downtime. Fortunately, we have a MongoDB API driver on CosmosDB. You need to deploy V3 of the captureordertd by means of a rolling update and still be able to capture orders, now in CosmosDB
 
