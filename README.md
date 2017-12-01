@@ -46,12 +46,13 @@ You'll then see the Cloud Shell open at the bottom of the screen.
 
 Copy and paste this script into the Cloud Shell.  It'll do 3 things;
 1. Create a resource group called K8S in eastus.
-1. Create a ACS cluster with a few specific options set.  You don't have to provide half of these, but i quite like the new B and Dv3 series - so we're setting that up.  The default would have been a D2_V2 VM for both agent and master VM's that get created.  It also would have been 3 agents, but 1 is enough for the time being.
+1. Create a ACS cluster with a few specific options set.  You don't have to provide half of these, but i quite like the new B- so we're setting that up.  The default would have been a D2_V2 VM for both agent and master VM's that get created.  It also would have been 3 agents, but 1 is enough for the time being.
 
     ```
-    az group create --name K8s --location eastus
-    az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2s_v3 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
-    az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
+az group create --name K8s --location eastus
+az acs create --orchestrator-type kubernetes --resource-group K8s --name K8sCluster --generate-ssh-keys --agent-count=1 --agent-vm-size=Standard_D2_v2 --agent-osdisk-size=32 --agent-storage-profile=ManagedDisks --master-vm-size=Standard_B1s
+az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
+zip -q -9 -j ~/clouddrive/sshkeys-$(date +%F).zip ~/.ssh/*
     ```
 
 This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remember, always read ahead :)
@@ -68,9 +69,16 @@ Lets see what's been created
 
 ## Exercise 3 - Accessing the dashboard
 
+```az acs kubernetes browse -g <yourresourcegroupk8> -n <yourk8cluster>```
+
 
 ## Exercise 4 - Running your first container
-
+From within the dashboard, go add
+1. new pod
+1. name =nginx
+1. external ip
+1. port 80
+1. boom.
 
 ## Exercise 5 - Autohealing
 
@@ -81,12 +89,10 @@ Run this command and see what pods you have running
     ```
 
 Now delete the pod
-
     ```
     kubectl delete pod NameOfYourPod
     ```
 Run this command again and see what's reported
-
     ```
     kubectl get pods -w
     ```
