@@ -5,7 +5,7 @@ This is currently a work in progress....  Do not follow... yet :)
 
 ## Origin Story
 Forked from https://github.com/shanepeckham/UKTechDay---OSS-App-Modernisation which was a Level 400 version.
-The Level 200-300 lab works up the basics a little slower.
+This Level 200-300 lab works up the basics a little slower.
 
 ## Tools required
 Exercises 1-6
@@ -24,7 +24,8 @@ If you really want to use the Powershell on Windows 7, go for it... But you'll b
 ## Exercise 0 - The Illustrated Children's Guide to Kubernetes
 If you haven't seen this, watching it will take 8 minutes and it does the best job of talking about the Kubernetes constructs that i've seen.
 Go watch it.  Seriously.
-https://www.youtube.com/watch?v=4ht22ReBjno 
+[![Illustrated Children's Guide to Kubernetes](http://img.youtube.com/vi/4ht22ReBjno/0.jpg)](https://www.youtube.com/watch?v=4ht22ReBjno  "Illustrated Children's Guide to Kubernetes")
+
 
 ## Exercise 1 - Creating a Kubernetes Cluster in Azure.
 At the time of writing, ACS (Azure Container Service) is the recommended option, not AKS which is still in preview.
@@ -32,9 +33,10 @@ There are 2 main ways of creating an ACS Cluster.
 1. In the Azure Portal GUI
 1. Using the Azure CLI
 
-My preference is the Cloud Shell because it generates the SSH keys for you as well as the service principal.  Feel free to use the Portal GUI, but you're going off-lab (but just a little bit so don't worry too much.
+My preference is the *Azure CLI* because it generates the SSH keys for you as well as the service principal.  The easiest way to use the Azure CLI is in Cloud Shell in the Azure Portal. 
+Feel free to use the Portal GUI to create the service, but you're going off-lab (but just a little bit so don't worry too much.
 
-For everyone else, lets open the Cloud Shell.  
+Lets open the Cloud Shell.  
 
 > https://portal.azure.com
 
