@@ -24,6 +24,7 @@ If you really want to use the Powershell on Windows 7, go for it... But you'll b
 ## Exercise 0 - The Illustrated Children's Guide to Kubernetes
 If you haven't seen this, watching it will take 8 minutes and it does the best job of talking about the Kubernetes constructs that i've seen.
 Go watch it.  Seriously.
+
 [![Illustrated Children's Guide to Kubernetes](http://img.youtube.com/vi/4ht22ReBjno/0.jpg)](https://www.youtube.com/watch?v=4ht22ReBjno  "Illustrated Children's Guide to Kubernetes")
 
 
