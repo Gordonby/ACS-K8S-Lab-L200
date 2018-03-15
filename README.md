@@ -1,4 +1,4 @@
-# Azure Container Service - Kubernetes Lab.  Level 200-300
+# Azure Container Service - Kubernetes Lab.  Level 200-250
 
 ## WARNING
 This is currently a work in progress....  Do not follow... yet :)
