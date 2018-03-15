@@ -111,7 +111,7 @@ It's important to realise that an actual public ip address has been created
 You can hit this IP address in a browser and interact with the web app that's been created.
 
 ## Exercise 4 - YAML
-
+Explanation of the YAML strucuture.
 
 
 ## Exercise 5 - Autohealing
@@ -134,46 +134,6 @@ I'm expecting that your pod has gone, but a very similarly named one has been pu
 TA-DA.  Autohealing!
 
 ![image](./Media/delete-pod.png) 
-
-## Exercise 6 - Sock shop
-Ok, so Exercises 1-5 have been pretty simple.  We're familiar with kubectl, we've created a couple of containers and feeling pretty confident eh?
-Now yets run up the Sock Shop, a multi-container deployment which has a web front-end, nosql database and a slew of services.
-The purpose of this is
-1. Introduction to namespaces
-1. Introduction to YAML
-1. Introduction to services
-1. Introduction to deployments
-
-* You will find the sock shop yaml files inside the SockShop folder. Have at look the various components of the solution and how they are formulated in yaml
-* Deploy the objects using:
-
-    ```
-    kubectl create -f ./SockShop/
-    ```
-    ```
-    kubectl create -f ./SockShop/deployments
-    ```
-    ```
-    kubectl create -f ./SockShop/services
-    ```
-    ```
-    kubectl create -f ./SockShop/volume
-    ```
-
-
-* You can run the following command against your K8 cluster and see your sock shop pods:
-
-```
-kubectl --namespace sock-shop get pods
-```
-
-![image](./Media/sock-shop-pods.png) 
-
-
-Now lets connect to the Sock-Shop front end website.
-
-
-For now, we're going to abandon Sock Shop, but we'll be back to revisit it.
 
 ## Exercise 7 - Contexts, moving and sharing.
 
@@ -228,7 +188,6 @@ Now you can run the following command:
 ```k8 get nodes```
 
 
-
 ## Exercise 8 - Accessing the dashboard
 Kubernetes has a web dashboard, who knew!
 Lets have a look
@@ -270,120 +229,6 @@ Now lets have a quick look at all the things we could install with Helm
     ```
     helm search
     ```
-    
-
-## Exercise 11 - MongoDb and Persistent Volume Claims
-Running a database in a container... A good idea?  Lets see.
-
-Here we want you to 
-1. Deploy a mongoDB single pod using a standard Helm chart
-
-To install MongoDB via Helm use
-
-```helm install --name mongo stable/mongodb```
-
-If you get an error about tiller version, update the HELM version on the server, upgrade using:
-
-```helm init --upgrade```
-
-To see the environment variables
-```kubectl exec -it <thenameofyourpod> -- /bin/bash```
-```
-printenv
-```
-
-## Exercise 12 - Running an API to add data to MongoDb
-1. Deploy the container *captureordertd:v2*, populating the environment variables and expose the captureordertd:v2 container as a public endpoint by using a Service. (*Yaml writing time everyone!  Notepad (or VS Code at the ready)*)
-1. You must deploy v2 of the captureordertd
-
-* Your captureordertd service has an external IP
-* Inspect the environment variables to make sure your team name is correct 
-* You can connect to the captureordertd API via the following uri http://<your svc IP>:8080/swagger
-* You can run the Swagger test harness and get a MongoDB orderid as a response
-* You can connect to your Helm installed MongoDB instance using *mongo-mongodb-client* and check for a record
-* Check the pod logs to inspect the operations
-* Your team name is passed into the captureordertd container - *you will receive no scores if you do not do this*
-
-### Hints
-
-See https://hub.docker.com/r/shanepeckham/captureordertd/ for information on the container and what the environment variables look like for the v2 tag. You need to map this container over port 8080 as this is where it is listening.
-
-
-## Exercise 13 - Yaml and Environment Variables
-
-## Exercise 14 - Load testing
-
-## Exercise 15 - Horizontal Scale Out
-In Kubernetes an HPA is a horizontal scaling unit with which we will use to auto-scale a Deployment based on threshold criteria. Your challenge is to run a load test against the captureordertd endpoint and see your captureordertd pods autoscale.
-
-* You must deploy captureordertd as a Deployment object in Kubernetes in order to apply an HPA to it
-* You can use the following on cluster container to test the load on your captureordertd Deployment
-* You must deploy v2 of the captureordertd
-
-
-```
-kubectl run -i --tty load-generator --image=busybox /bin/sh
-```
-
-If it is already running, you can attach to it:
-
-```
-kubectl attach <pod> -c load-generator -i -t
-```
-
-And then run the following infinite load generation script:
-
-```
-while true; do wget -q -O- http://<externalIp or internal DNS>:8080/v1/order/ --post-data "EmailAddress=abc@abc.com"; done
-```
-
-Use the following to see your top pod activity
-
-```
-kubectl top pods 
-```
-
-and to see your pod status as they inflate and deflate
-
-```
-kubectl get pods -w
-```
-
-### Success Criteria
-
-* You are able to see the multiple pods spawning during the load
-
-## Exercise 16 - Perform a rolling update - live replace of MongoDB with CosmosDB 
-
-We now need to replace MongoDB with CosmosDB, without minimal downtime. Fortunately, we have a MongoDB API driver on CosmosDB. You need to deploy V3 of the captureordertd by means of a rolling update and still be able to capture orders, now in CosmosDB
-
-### Hints
-
-* You must deploy v3 of the captureordertd and replace v2 - see Docker Hub for any info
-* You must provision a CosmosDB instance and use the MongoDB API driver
-
-### Success Criteria
-
-* You can see records captured to CosmosDB not MongoDB
-* You can see your pods being replaced by the new version
-* You can rollback the update - see below
-
-Once you have completed the upgrade, do the following:
-
-To see the status of the rolling update
-
-```
-kubectl rollout history deployment captureordertd
-```
-
-Now rollback the update using this command
-
-```
-kubectl rollout undo deployment captureordertd
-```
-
-
-
 
 
 
