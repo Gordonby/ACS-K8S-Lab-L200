@@ -11,7 +11,7 @@ This Level 200-300 lab works up the basics a little slower.
 Exercises 1-6
 * Azure Cloud Shell (Bash version) (It's built into the Azure Portal, nothing to install!)
 
-Exercises 7-15
+Exercises 7-10
 * Bash on a linux OS (or the Linux subsystem for Windows 10)
 
 ## Caveats
