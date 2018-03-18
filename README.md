@@ -94,7 +94,7 @@ The YAML file declaratively states the container name location and any other sup
     ```
     mkdir ~/clouddrive/acs-yaml
     cd ~/clouddrive/acs-yaml
-    curl -O https://raw.githubusercontent.com/Azure-Samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yml
+    curl -O https://raw.githubusercontent.com/Azure-Samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yaml
     kubectl create -f azure-vote-all-in-one-redis.yml
     ```
 
