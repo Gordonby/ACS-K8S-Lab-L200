@@ -111,7 +111,11 @@ It's important to realise that an actual public ip address has been created
 You can hit this IP address in a browser and interact with the web app that's been created.
 
 ## Exercise 4 - YAML
-Explanation of the YAML strucuture.
+Typically, you would have two types of yaml files to help Kubernetes understand what your applications consist of and how they would operate. These two files would be the deployment and services yaml file. Let's drill down into what roles they have with k8s:
+
+Deployment: According to Kubernetes documentation "You describe a desired state in a Deployment object, and the Deployment controller changes the actual state to the desired state at a controlled rate". In my own words, deployments let you define parameters such as how many replicas your applications will have (how many containers will be spun up for the application), the docker image location of your container and the name of it.  Let's review the two deployment configurations (the azure vote frontend and backend apps) from the yaml file you deployed earlier:
+
+![image](./Media/deployment-yaml.png) 
 
 
 ## Exercise 5 - Autohealing
