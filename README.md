@@ -1,5 +1,8 @@
 # Azure Container Service - Kubernetes Lab.  Level 200-250
 
+## Objectives
+This lab is aimed at people who haven't yet used Kubernetes.  It takes you through a step by step installation on Azure using the Azure Container Service, and the most common commands and operations to get started with Kubernetes.
+
 ## Tools required
 Exercises 1-6
 * Azure Cloud Shell (Bash version) (It's built into the Azure Portal, nothing to install!)
