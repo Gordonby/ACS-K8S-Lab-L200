@@ -196,36 +196,28 @@ From within the dashboard, go create then complete the details as per screenshot
 
 Let's back out of the dashboard and run these commands to see what's been created.
 
-    ```
-    kubectl get pods
-    ```
-    ```
-    kubectl get svc
-    ```
+> kubectl get pods
+>
+> kubectl get svc
 
 ## Exercsie 10 - Helm
 Helm is a package manager for Kubernetes.  It will simply allow the installation of complex software using *Helm Charts* (are you noticing a terminology theme yet :)).
 
 Please read the introduction section through to the installation section here : https://github.com/kubernetes/helm
 
-Once installed, initialise it.
+Once installed, initialise it.  This will install a tiller pod into the cluster.
 
-    ```
-    helm init
-    ```
+> helm init
 
 Now lets have a quick look at all the things we could install with Helm
 
-    ```
-    helm search
-    ```
+> helm search
 
 The syntax for installing a package is 
 
-    ```
-    helm install --name my-blog stable/wordpress
+> helm install --name my-blog stable/wordpress
 
-    
+
 
 ## Troubleshooting Tips
 
@@ -234,7 +226,7 @@ The syntax for installing a package is
 
 #### HELM refused to work, because of version Mismatch
     helm incompatible versions client[v2.7.2] server[v2.5.1]
->helm init --upgrade
+> helm init --upgrade
 
 
 
