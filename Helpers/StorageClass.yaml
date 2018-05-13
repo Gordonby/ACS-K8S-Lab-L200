@@ -1,8 +1,0 @@
-kind: StorageClass
-apiVersion: 
-metadata:
-  name: 
-provisioner: 
-parameters:
-  storageaccounttype: 
-  kind: 
