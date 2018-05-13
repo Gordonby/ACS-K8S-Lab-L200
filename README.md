@@ -1,9 +1,5 @@
 # Azure Container Service - Kubernetes Lab.  Level 200-250
 
-## Origin Story
-Forked from https://github.com/shanepeckham/UKTechDay---OSS-App-Modernisation which was a Level 400 version.
-This Level 200-300 lab works up the basics a little slower.
-
 ## Tools required
 Exercises 1-6
 * Azure Cloud Shell (Bash version) (It's built into the Azure Portal, nothing to install!)
