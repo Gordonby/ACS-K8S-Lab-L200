@@ -1,8 +1,5 @@
 # Azure Container Service - Kubernetes Lab.  Level 200-250
 
-## WARNING
-This is currently a work in progress....  Do not follow... yet :)
-
 ## Origin Story
 Forked from https://github.com/shanepeckham/UKTechDay---OSS-App-Modernisation which was a Level 400 version.
 This Level 200-300 lab works up the basics a little slower.
@@ -20,13 +17,6 @@ No Windows, no GUI's.  By that i mean you can of course use the Windows OS, but 
 1. A Linux VM inside Hyper-V.
 
 If you really want to use the Powershell on Windows 7, go for it... But you'll be going off-lab and will likely have issues to resolve that aren't covered in this guide.
-
-## Exercise 0 - The Illustrated Children's Guide to Kubernetes
-If you haven't seen this, watching it will take 8 minutes and it does the best job of talking about the Kubernetes constructs that i've seen.
-Go watch it.  Seriously.
-
-[![Illustrated Children's Guide to Kubernetes](http://img.youtube.com/vi/4ht22ReBjno/0.jpg)](https://www.youtube.com/watch?v=4ht22ReBjno  "Illustrated Children's Guide to Kubernetes")
-
 
 ## Exercise 1 - Creating a Kubernetes Cluster in Azure.
 At the time of writing, ACS (Azure Container Service) is the recommended option, not AKS which is still in preview.
@@ -57,8 +47,11 @@ Copy and paste this script into the Cloud Shell.  It'll do 3 things;
     az acs kubernetes get-credentials --resource-group=K8s --name=K8sCluster 
     ```
 
-This takes about 10 minutes to provision.  So guess what, that video from step 0 that you didn't watch - go watch it now!  If you actually watched it in Step 0, treat yourself - go watch it again... And remember, always read ahead :)
-https://www.youtube.com/watch?v=4ht22ReBjno 
+This takes between 10 and 30 minutes to provision.  So lets use this time to watch the Illustrated Children's Guide to Kubernetes.
+If you haven't seen this, watching it will take 8 minutes and it does the best job of talking about the Kubernetes constructs that i've seen.  If you have already seen it, i'd encourage a second watch just to let everything sink in.
+
+[![Illustrated Children's Guide to Kubernetes](http://img.youtube.com/vi/4ht22ReBjno/0.jpg)](https://www.youtube.com/watch?v=4ht22ReBjno  "Illustrated Children's Guide to Kubernetes")
+
 
 ### Post creation
 After the cluster has been created, in the Azure Portal find the resource group and open it up.  You'll see a lot of Azure services have been created.  It's important to realise that we have
@@ -166,16 +159,8 @@ We should backup the SSH keys that were generated when we created the cluster.  
 In the same way as you downloaded the config zip, do the same for the ssh key zip.
 
 ### Installing Kubectl
-We need to install Kubectl into your linux environment.
-
-If you're using *Bash on Ubuntu on Windows* here's the command
-
-    ```
-    .
-    ```
-
-Otherwise, consult this page on how to install it : https://kubernetes.io/docs/tasks/tools/install-kubectl/
-
+We need to install Kubectl into your local linux environment.
+Follow the appropriate instructions here : https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 ### Copying in the config
 Copy it to the directory /.kube on your machine, it should exist if you instal kubectl. 
@@ -235,76 +220,10 @@ Now lets have a quick look at all the things we could install with Helm
     ```
 
 
+## Troubleshooting Tips
 
-
-## Command cheat sheet
-
-### Create AKS Cluster
-```
-az acs create --orchestrator-type kubernetes --resource-group <yourresourcegroupk8> --name <yourk8cluster> --generate-ssh-keys
-```
-
-### Install Kubectl
-```az acs kubernetes install-cli``
-
-### Get Creds for K8s
-```az acs kubernetes get-credentials --resource-group=<yourresourcegroupk8> --name=<yourk8cluster>```
-
-###Check it's all working
-```kubectl get nodes```
-
-### Browse k8s dashboard
-
-```az acs kubernetes browse -g <yourresourcegroupk8> -n <yourk8cluster>```
-
-### Install Helm
-```
-apt install linuxbrew-wrapper
-brew install kubernetes-helm
-```
-
-#### Or if that messes up
-```
-curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
-chmod 700 get_helm.sh
-./get_helm.sh
-```
-
-### Test mongoDb post install
-```
-kubectl run mongo-mongodb-client --rm --tty -i --image bitnami/mongodb --command -- mongo --host mongo-mongodb
-```
-
-### Test out by using some simple commands
-```
-    show dbs
-    cosmos = { title:"CosmosDb", category:"Database", url:"https://docs.microsoft.com/en-us/azure/cosmos-db/introduction" }
-    azuredb = { title:"AzureDb", category:"Database", url:"https://azure.microsoft.com/en-us/services/sql-database/" }
-    db.azureservices.save(cosmos)
-    db.azureservices.save(azuredb)
-    db.azureservices.find()
-```
-
-
-### Open the swagger page on the new External IP - Submit an order
-http://<your external ip>:8080/swagger/
-
-
-### Log back into mongo and check for the data
-
-    > db
-    test
-    > use k8orders
-    switched to db k8orders
-    > show collections
-    orders
-    > db.orders.find()
-    { "_id" : ObjectId("5a1d8b8faad9887d8fcc124a"), "id" : "5a1d8b8f354a8b004699ab89", "emailaddress" : "test@test.com", "preferredlanguage" : "en-gb", "product" : "balls", "total" : 1, "source" : "swagger", "status" : "Open" }
-
-### Inspect pod logs
+#### Inspect pod logs
     kubectl logs thenameofyourpod
-
-## Troubleshooting
 
 #### HELM refused to work, because of version Mismatch
     helm incompatible versions client[v2.7.2] server[v2.5.1]
