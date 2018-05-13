@@ -186,17 +186,15 @@ Lets have a look
 
 ```az acs kubernetes browse -g K8S -n K8SCluster```
 
+![image](./Media/dashboard.png) 
+
 ## Exercise 9 - Creating a deployment in the Dashboard GUI
-From within the dashboard, go add
-1. new pod
-1. name =nginx
-1. external ip
-1. port 80
-1. boom.
+From within the dashboard, go create then complete the details as per screenshot.
+![image](./Media/dash-nginx.png) 
 
-Let's back out of the dashboard, now and for the rest of the lab.
+![image](./Media/dash-deployments.png)
 
-Run this command to see what's been created.
+Let's back out of the dashboard and run these commands to see what's been created.
 
     ```
     kubectl get pods
@@ -222,6 +220,12 @@ Now lets have a quick look at all the things we could install with Helm
     helm search
     ```
 
+The syntax for installing a package is 
+
+    ```
+    helm install --name my-blog stable/wordpress
+
+    
 
 ## Troubleshooting Tips
 
